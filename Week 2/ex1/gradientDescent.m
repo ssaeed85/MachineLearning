@@ -20,8 +20,8 @@ for iter = 1:num_iters
     temp1 =0;
     temp2 =0;
     for i=1:m
-        temp1 = temp1 + ( theta(1)*X(i,1) + theta(2) * X(i,2) - y(i))*X(i,1);
-        temp2 = temp2 + ( theta(1)*X(i,1) + theta(2) * X(i,2) - y(i))*X(i,2);
+        temp1 = temp1 + ( theta'*X(i,:)' - y(i))*X(i,1);
+        temp2 = temp2 + ( theta'*X(i,:)' - y(i))*X(i,2);
     end
     
     theta(1) = theta(1) - alpha * temp1 / m;
