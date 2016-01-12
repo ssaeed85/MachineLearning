@@ -63,6 +63,17 @@ Theta2_grad = zeros(size(Theta2));
 %
 
 
+%=================================
+% Saad's note
+% The formulae are heavily dependant on how the vector/matrix 
+% have been setup. For e.g., whether you're using column vectors
+% or row vectors or as part of a matrix. As a result, the formula
+% may call for a transpose of a vector but for the theory to work
+% I may have transposed the other vector and rearranged.
+% READ AND UNDERSTAND THE THEORY AND WHAT ITS TRYING TO IMPLY
+%==================================
+
+
 A1=X;
 
 A1 = [ones(m, 1) A1];
@@ -89,16 +100,24 @@ J = sum(J(:)); % Adds all elements of matrix
 % Calculating regularization element
 
 Reg = 0;
-temp1 = Theta1(:,2:end) .^ 2;
-temp2 = Theta2(:,2:end) .^ 2;
-temp = sum(temp1(:))+sum(temp2(:));
-Reg = lambda/(2*m) * temp;
+Theta1Squared = Theta1(:,2:end) .^ 2; % ignore first (bias) column
+Theta2Squared = Theta2(:,2:end) .^ 2;
+Reg = lambda/(2*m) * (sum(Theta1Squared(:))+sum(Theta2Squared(:)));
 
-% Cost fun
+% Regularized cost function
 J = J+Reg;
 % -------------------------------------------------------------
 
 % =========================================================================
+
+delta3 = A3 - Y;
+delta2 = (delta3 * Theta2); % Matricised
+delta2 = delta2(:,2:end) .* sigmoidGradient(Z2); % Ignore first column
+
+Delta1 = delta2'*A1;
+Delta2 = delta3'*A2;
+Theta1_grad = Delta1/m;
+Theta2_grad = Delta2/m;
 
 % Unroll gradients
 grad = [Theta1_grad(:) ; Theta2_grad(:)];

@@ -63,6 +63,17 @@ Theta2_grad = zeros(size(Theta2));
 %
 
 
+%==================================
+% Saad's note to self:
+% The formulae are heavily dependant on how the vector/matrix 
+% have been setup. For e.g., whether you're using column vectors
+% or row vectors or as part of a matrix. As a result, the formula
+% may call for a transpose of a vector but for the theory to work
+% I may have transposed the other vector and rearranged.
+% READ AND UNDERSTAND THE THEORY AND WHAT ITS TRYING TO IMPLY
+%==================================
+
+
 A1=X;
 
 A1 = [ones(m, 1) A1];
@@ -98,6 +109,15 @@ J = J+Reg;
 % -------------------------------------------------------------
 
 % =========================================================================
+
+delta3 = A3 - Y;
+delta2 = (delta3 * Theta2); % Matricised
+delta2 = delta2(:,2:end) .* sigmoidGradient(Z2); % Ignore first column
+
+Delta1 = delta2'*A1;
+Delta2 = delta3'*A2;
+Theta1_grad = Delta1/m;
+Theta2_grad = Delta2/m;
 
 % Unroll gradients
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
