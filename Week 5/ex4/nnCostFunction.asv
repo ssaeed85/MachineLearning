@@ -89,11 +89,12 @@ J = sum(J(:)); % Adds all elements of matrix
 % Calculating regularization element
 
 Reg = 0;
-Theta1Squared = Theta1(:,2:end) .^ 2; % ignore first (bias) column
-Theta2Squared = Theta2(:,2:end) .^ 2;
-Reg = lambda/(2*m) * (sum(Theta1Squared(:))+sum(Theta2Squared(:)));
+temp1 = Theta1(:,2:end) .^ 2;
+temp2 = Theta2(:,2:end) .^ 2;
+temp = sum(temp1(:))+sum(temp2(:));
+Reg = lambda/(2*m) * temp;
 
-% Regularized cost function
+% Cost fun
 J = J+Reg;
 % -------------------------------------------------------------
 
