@@ -119,6 +119,9 @@ Delta2 = delta3'*A2;
 Theta1_grad = Delta1/m;
 Theta2_grad = Delta2/m;
 
+% Adding regularization
+Theta1_grad(:,2:end) = Theta1_grad(:,2:end) + lambda/m * Theta1(:,2:end);
+Theta2_grad(:,2:end) = Theta2_grad(:,2:end) + lambda/m * Theta2(:,2:end);
 % Unroll gradients
 grad = [Theta1_grad(:) ; Theta2_grad(:)];
 
