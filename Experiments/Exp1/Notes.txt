@@ -1,0 +1,1 @@
+Effect of changing the threshold value on Precision, Recall, Accuracy and F score
