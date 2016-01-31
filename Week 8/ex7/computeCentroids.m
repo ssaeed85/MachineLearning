@@ -15,6 +15,7 @@ function centroids = computeCentroids(X, idx, K)
 
 % You need to return the following variables correctly.
 centroids = zeros(K, n);
+summation = zeros(m, n);
 
 
 % ====================== YOUR CODE HERE ======================
@@ -26,10 +27,12 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
-
-
-
-
+% Note: repmat can be used to replicate matrix
+for i=1:K
+    numberAssigned = sum(idx==i);
+    summation = sum( [repmat(idx==i,1,n)].*X);
+    centroids(i,:) = summation / numberAssigned;
+end
 
 
 
