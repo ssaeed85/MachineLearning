@@ -28,7 +28,7 @@ for i=1:m
     for j=1:K
         sqDist(i,j) = sum( ( X(i,:) - centroids(j,:) ).^2 );
     end
-    idx(i)=find(sqDist(i,:)==min(sqDist(i,:)));
+    idx(i)=randsample(find(sqDist(i,:)==min(sqDist(i,:)));)
 end
 
 
