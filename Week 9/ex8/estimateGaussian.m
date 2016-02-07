@@ -22,8 +22,7 @@ sigma2 = zeros(n, 1);
 %
 
 mu = (1/m) * sum(X);
-temp = repmat(mu,m,1);
-sigma2 = (1/m) * sum((X - temp).^2);
+sigma2 = (1/m) * sum((X - repmat(mu,m,1)).^2);
 
 mu = mu';
 sigma2 = sigma2';
