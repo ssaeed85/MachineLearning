@@ -44,7 +44,27 @@ J = (1/2)* sum(sum(((X*Theta'-Y).^2).*R));
 
 temp =(X*Theta'-Y) .* R;
 X_grad = temp*Theta;
-Theta_grad = temp'*X;
+Theta_grad = tem
+%Theta_grad = (repmat(sum(temp.*R),size(Theta,2),1) .* Theta')';
+
+%X_grad = repmat(sum(temp.*R,2),1,size(X,2)) .* X;
+
+%for i=1:num_movies
+%    idx = find(R(i,:)==1);
+%    Thetatemp = Theta(idx,:);
+%    Ytemp = Y(i,idx);
+%    X_grad(i,:) = (X(i, :)*Thetatemp' - Ytemp)*Thetatemp;
+%end
+
+%for j=1:num_users
+%    idx = find(R(j,:)==1);
+%   Thetatemp = Theta(idx,:);
+%    Ytemp = Y(j,idx);
+%    Theta_grad(j,:) = (Theta(j, :)*Thetatemp' - Ytemp)*Thetatemp;
+%end
+
+temp = (X*Theta'-Y) .* R;
+
 
 
 % =============================================================
